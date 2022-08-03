@@ -9,6 +9,8 @@ This example uses the mDNS hostname to connect the server.
 
 Since ESP-IDF Ver5, mDNS has been moved from built-in library to component library.   
 You need to add the component using the Manifest File (idf_component.yml) befor build.   
+This repository contains a Manifest File (idf_component.yml).   
+
 The official repository for mDNS is [here](https://github.com/espressif/esp-protocols).   
 
 # How to use
