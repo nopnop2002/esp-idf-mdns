@@ -1,5 +1,8 @@
 # tcp-server using mdns
 
+# Software requirements
+esp-idf v4.4 or later.   
+
 # Installation
 ```
 git clone https://github.com/nopnop2002/esp-idf-mdns
