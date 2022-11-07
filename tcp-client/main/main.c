@@ -6,6 +6,10 @@
 	 software is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
 	 CONDITIONS OF ANY KIND, either express or implied.
 */
+
+
+#include <stdio.h>
+#include <inttypes.h>
 #include <string.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -128,7 +132,7 @@ static void timer_cb(TimerHandle_t xTimer)
 	char buffer[xItemSize];
 	ESP_LOGD(TAG, "timer_cb");
 	TickType_t nowTick = xTaskGetTickCount();
-	sprintf(buffer,"Hello World!! %d",nowTick);
+	sprintf(buffer,"Hello World!! %"PRIu32, nowTick);
 	//BaseType_t xHigherPriorityTaskWoken = pdFALSE;
 	//xMessageBufferSendFromISR(xMessageBufferTrans, &buffer, strlen(buffer), &xHigherPriorityTaskWoken);
 	xMessageBufferSendFromISR(xMessageBufferTrans, &buffer, strlen(buffer), NULL);
@@ -152,11 +156,35 @@ static esp_err_t query_mdns_host(const char * host_name, struct esp_ip4_addr *ad
 	}
 
 	ESP_LOGI(TAG, "Query A: %s.local resolved to: " IPSTR, host_name, IP2STR(addr));
-	ESP_LOGI(TAG, "Query A: addr->addr=%d", addr->addr);
+	ESP_LOGI(TAG, "Query A: addr->addr=0x%"PRIx32, addr->addr);
 	return ESP_OK;
 }
 
 void tcp_client_task(void *pvParameters);
+
+void keyin(void *pvParameters)
+{
+	ESP_LOGI(pcTaskGetName(NULL), "Start");
+	char buffer[xItemSize];
+	strcpy(buffer, "EXIT");
+
+	uint16_t c;
+	while (1) {
+		c = fgetc(stdin);
+		if (c == 0xffff) {
+			vTaskDelay(10);
+			continue;
+		}
+		//ESP_LOGI(pcTaskGetName(NULL), "c=%x", c);
+		if (c == 0x0a) {
+			ESP_LOGI(pcTaskGetName(NULL), "Push Enter");
+			xMessageBufferSendFromISR(xMessageBufferTrans, &buffer, strlen(buffer), NULL);
+		}
+	}
+
+	/* Never reach here */
+	vTaskDelete( NULL );
+}
 
 void app_main(void)
 {
@@ -199,6 +227,9 @@ void app_main(void)
 	sprintf(param.ipv4, IPSTR, IP2STR(&addr));
 	param.taskHandle = xTaskGetCurrentTaskHandle();
 	xTaskCreate(tcp_client_task, "tcp_client", 1024*4, (void *)&param, 5, NULL);
+
+	// Start keyboard task
+	xTaskCreate(keyin, "KEYIN", 1024*2, NULL, 5, NULL);
 
 	ulTaskNotifyTake( pdTRUE, portMAX_DELAY );
 	ESP_LOGI(TAG, "ulTaskNotifyTake");

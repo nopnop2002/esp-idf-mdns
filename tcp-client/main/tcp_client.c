@@ -6,6 +6,9 @@
 	 software is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
 	 CONDITIONS OF ANY KIND, either express or implied.
 */
+
+#include <stdio.h>
+#include <inttypes.h>
 #include <string.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -39,7 +42,7 @@ void tcp_client_task(void *pvParameters)
 	dest_addr.sin_family = AF_INET;
 	dest_addr.sin_port = htons(param.port);
 	dest_addr.sin_addr.s_addr = inet_addr(param.ipv4);
-	ESP_LOGI(TAG, "dest_addr.sin_addr.s_addr=%x", dest_addr.sin_addr.s_addr);
+	ESP_LOGI(TAG, "dest_addr.sin_addr.s_addr=0x%"PRIx32, dest_addr.sin_addr.s_addr);
 	if (dest_addr.sin_addr.s_addr == 0xffffffff) {
 		ESP_LOGI(TAG, "convert from host to ip");
 		struct hostent *hp;
@@ -52,7 +55,7 @@ void tcp_client_task(void *pvParameters)
 		ip4_addr = (struct ip4_addr *)hp->h_addr;
 		dest_addr.sin_addr.s_addr = ip4_addr->addr;
 	}
-	ESP_LOGI(TAG, "dest_addr.sin_addr.s_addr=%x", dest_addr.sin_addr.s_addr);
+	ESP_LOGI(TAG, "dest_addr.sin_addr.s_addr=0x%"PRIx32, dest_addr.sin_addr.s_addr);
 
 	addr_family = AF_INET;
 	ip_protocol = IPPROTO_IP;
@@ -79,9 +82,13 @@ void tcp_client_task(void *pvParameters)
 		ESP_LOGI(TAG, "xMessageBufferReceive received=%d", received);
 		if (received > 0) {
 			ESP_LOGI(TAG, "xMessageBufferReceive buffer=[%.*s]",received, buffer);
+			if (strncmp(buffer, "EXIT", 4) == 0) break;
+
+			// Send to server
 			int ret = send(sock, buffer, received, 0);
 			LWIP_ASSERT("ret == received", ret == received);
 
+			// Receive from server
 			int len = recv(sock, rx_buffer, sizeof(rx_buffer) - 1, 0);
 			LWIP_ASSERT("len > 0", len > 0);
 			//rx_buffer[len] = 0; // Null-terminate whatever we received and treat like a string
@@ -94,7 +101,7 @@ void tcp_client_task(void *pvParameters)
 	} // end while
 
 	if (sock != -1) {
-		ESP_LOGE(TAG, "Shutting down socket and restarting...");
+		ESP_LOGE(TAG, "Shutting down socket");
 		shutdown(sock, 0);
 		close(sock);
 	}
