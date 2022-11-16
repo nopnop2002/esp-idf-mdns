@@ -17,5 +17,6 @@ The official repository for mDNS is [here](https://github.com/espressif/esp-prot
 # How to use
 Build the server first.   
 Then build the client.   
-__Both must have the same mDNS hostname and port number.__   
+The client does not need to know the server's IP address.   
+__But both must have the same mDNS hostname and port number.__   
 Pressing the Enter key on the client side will shutdown the connection.   
