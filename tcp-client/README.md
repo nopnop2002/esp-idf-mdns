@@ -1,7 +1,7 @@
 # tcp-client using mdns
 
 # Software requirements
-esp-idf v4.4 or later.   
+esp-idf v4.4/v5.0.   
 
 # Installation
 ```
