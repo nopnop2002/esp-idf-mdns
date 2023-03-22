@@ -3,7 +3,7 @@ How to name resolution by mDNS.
 
 Since ESP-IDF Ver5, mDNS has been moved from built-in library to component library.   
 Accordingly, the mDNS official example has been removed from the ESP-IDF repository.   
-The official repository for mDNS is [here](https://github.com/espressif/esp-protocols).   
+The official repository for mDNS is [here](https://github.com/espressif/esp-protocols/tree/master/components/mdns).   
 
 The official repository comes with example code, but it's a bit confusing.   
 There are two methods for name resolution using mDNS.   
