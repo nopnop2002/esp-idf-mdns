@@ -1,6 +1,6 @@
 menu "Application Configuration"
 
-	config ESP_WIFI_SSID
+  config ESP_WIFI_SSID
 		string "WiFi SSID"
 		default "myssid"
 		help
@@ -18,17 +18,12 @@ menu "Application Configuration"
 		help
 			Set the Maximum retry to avoid station reconnecting to the AP unlimited when the AP is really inexistent.
 
-	config MDNS_HOSTNAME
-		string "mDNS hostname"
-		default "esp32"
-		help
-			mDNS hostname
+	config MY_HOSTNAME
+		string
+		default "esp32-mdns1"
 
-	config TCP_PORT
-		int "TCP Port"
-		range 0 65535
-		default 9876
-		help
-			The local port to which the server will listen on.
+	config YOUR_HOSTNAME
+		string
+		default "esp32-mdns2"
 
 endmenu
