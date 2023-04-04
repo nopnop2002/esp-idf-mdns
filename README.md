@@ -69,6 +69,7 @@ idf.py flash
 To find the IP address, you need to know the service name.   
 Duplicate service names are allowed.   
 If you give two nodes the same service name, they can find each other.   
+This is useful when doing P2P communication with UDP.   
 Write query-service to ESP32#1 and ESP32#2.   
 Each mDNS hostname is generated from MAC address.   
 Therefore, the other party's mDNS host name is completely unknown.   
