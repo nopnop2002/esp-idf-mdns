@@ -15,7 +15,7 @@ This is a quick example of each.
 
 # Software requiment
 ESP-IDF V4.4/V5.0.   
-ESP-IDF V5 is required when using ESP32-C2.   
+ESP-IDF V5.0 is required when using ESP32-C2.   
 
 # Hardware requirements
 Requires two ESP32s.   
