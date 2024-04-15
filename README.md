@@ -14,8 +14,9 @@ There are two methods for name resolution using mDNS.
 This is a quick example of each.   
 
 # Software requiment
-ESP-IDF V4.4/V5.0.   
+ESP-IDF V4.4/V5.x.   
 ESP-IDF V5.0 is required when using ESP32-C2.   
+ESP-IDF V5.1 is required when using ESP32-C6.   
 
 # Hardware requirements
 Requires two ESP32s.   
@@ -33,7 +34,6 @@ Look for ```esp32-mdns2.local```.
 ```
 git clone https://github.com/nopnop2002/esp-idf-mdns
 cd esp-idf-mdns/query-host1
-idf.py set-target {esp32/esp32s2/esp32s3/esp32c2/esp32c3}
 idf.py menuconfig
 idf.py flash
 ```
@@ -44,7 +44,6 @@ idf.py flash
 Look for ```esp32-mdns1.local```.   
 ```
 cd esp-idf-mdns/query-host2
-idf.py set-target {esp32/esp32s2/esp32s3/esp32c2/esp32c3}
 idf.py menuconfig
 idf.py flash
 ```
@@ -55,14 +54,6 @@ idf.py flash
 
 ### Screen shot
 ![screen-host](https://user-images.githubusercontent.com/6020549/226932565-e91a808d-113d-4802-81b9-aaec2df34d75.jpg)
-
-
-
-
-
-
-
-
 
 
 # Name resolution by service name   
@@ -79,7 +70,6 @@ Look for the service name of ```_service_49876```.
 ```
 git clone https://github.com/nopnop2002/esp-idf-mdns
 cd esp-idf-mdns/query-service
-idf.py set-target {esp32/esp32s2/esp32s3/esp32c2/esp32c3}
 idf.py menuconfig
 idf.py flash
 ```
@@ -88,7 +78,6 @@ idf.py flash
 Look for the service name of ```_service_49876```.   
 ```
 cd esp-idf-mdns/query-service
-idf.py set-target {esp32/esp32s2/esp32s3/esp32c2/esp32c3}
 idf.py menuconfig
 idf.py flash
 ```
