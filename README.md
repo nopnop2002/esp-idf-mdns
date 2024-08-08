@@ -26,8 +26,6 @@ Requires two ESP32s.
 To find the IP address, you need to know the mDNS hostname.   
 mDNS hostnames must be unique.   
 Write query-host1 to ESP32#1 and query-host2 to ESP32#2.   
-mDNS hostname for ESP32#1 is esp32-mdns1.local.   
-mDNS hostname for ESP32#2 is esp32-mdns2.local.   
 
 ### ESP32#1   
 The mDNS name for this project is ```esp32-mdns1.local```.   
