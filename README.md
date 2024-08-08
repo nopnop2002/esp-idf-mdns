@@ -66,7 +66,7 @@ Each mDNS hostname is generated from MAC address.
 Therefore, the other party's mDNS host name is completely unknown.   
 
 ### ESP32#1   
-This project looks for the service name of ```_service_49876```.   
+This project looks for the service name of ```_service_49876._udp```.   
 ```
 git clone https://github.com/nopnop2002/esp-idf-mdns
 cd esp-idf-mdns/query-service
@@ -75,7 +75,7 @@ idf.py flash
 ```
 
 ### ESP32#2   
-This project looks for the service name of ```_service_49876```.   
+This project looks for the service name of ```_service_49876._udp```.   
 ```
 cd esp-idf-mdns/query-service
 idf.py menuconfig
