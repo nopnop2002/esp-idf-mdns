@@ -30,7 +30,8 @@ mDNS hostname for ESP32#1 is esp32-mdns1.local.
 mDNS hostname for ESP32#2 is esp32-mdns2.local.   
 
 ### ESP32#1   
-This project looks for the mDNS name of ```esp32-mdns2.local```.   
+The mDNS name for this project is ```esp32-mdns1.local```.   
+Then look for the the mDNS name of ```esp32-mdns2.local```.   
 ```
 git clone https://github.com/nopnop2002/esp-idf-mdns
 cd esp-idf-mdns/query-host1
@@ -41,7 +42,8 @@ idf.py flash
 
 
 ### ESP32#2   
-This project looks for the mDNS name of ```esp32-mdns1.local```.   
+The mDNS name for this project is ```esp32-mdns2.local```.   
+Then look for the mDNS name of ```esp32-mdns1.local```.   
 ```
 cd esp-idf-mdns/query-host2
 idf.py menuconfig
