@@ -107,7 +107,6 @@ esp32-mdns1.local       192.168.10.115
 - Browse for mDNS/DNS-SD network services and browsing domains using the Avahi daemon.
 ```
 $ avahi-browse -ar
-+ enp2s0 IPv4 ESP32 with mDNS                               _service_49876._udp  local
 = enp2s0 IPv4 ESP32 with mDNS                               _service_49876._udp  local
    hostname = [esp32-mdns-05C634.local]
    address = [192.168.10.115]
