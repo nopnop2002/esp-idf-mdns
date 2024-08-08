@@ -125,3 +125,5 @@ $ avahi-browse -rt _service_49876._udp
    port = [49876]
    txt = []
 ```
+
+For more information is [here](https://wiki.debian.org/Avahi).
