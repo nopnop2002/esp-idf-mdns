@@ -90,3 +90,13 @@ idf.py flash
 
 ### Screen shot
 ![screen-service](https://user-images.githubusercontent.com/6020549/226932577-31477732-0770-4def-a1f0-544a6e28b382.jpg)
+
+
+# Resolving mDNS using avahi-utils
+```
+$ sudo apt install avahi-utils
+
+$ avahi-resolve -n esp32-mdns1.local
+esp32-mdns1.local       192.168.10.115
+```
+
