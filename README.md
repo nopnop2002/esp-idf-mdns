@@ -24,7 +24,7 @@ Requires two ESP32s.
 
 # Name resolution by host name   
 To find the IP address, you need to know the mDNS hostname.   
-mDNS hostnames must be unique.   
+mDNS hostnames must be unique within the network.   
 Write query-host1 to ESP32#1 and query-host2 to ESP32#2.   
 
 ### ESP32#1   
@@ -58,7 +58,7 @@ idf.py flash
 
 # Name resolution by service name   
 To find the IP address, you need to know the service name.   
-Duplicate service names are allowed.   
+Multiple hosts with the same service name are allowed within the network.   
 If you give two nodes the same service name, they can find each other.   
 This is useful when doing P2P communication with UDP.   
 Write query-service to ESP32#1 and ESP32#2.   
