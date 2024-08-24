@@ -7,9 +7,9 @@ The official repository for mDNS is [here](https://github.com/espressif/esp-prot
 
 
 The official repository comes with example code, but it's a bit confusing.   
-There are two methods for name resolution using mDNS.   
-- Name resolution by host name   
-- Name resolution by service name   
+There are two methods for IP address resolution using mDNS.   
+- IP address resolution by host name   
+- IP address resolution by service name   
 
 This is a quick example of each.   
 
@@ -22,7 +22,7 @@ ESP-IDF V5.1 is required when using ESP32-C6.
 Requires two ESP32s.   
 
 
-# Name resolution by host name   
+# IP address resolution by host name   
 To find the IP address, you need to know the mDNS hostname.   
 mDNS hostnames must be unique within the network.   
 Write query-host1 to ESP32#1 and query-host2 to ESP32#2.   
@@ -56,7 +56,7 @@ idf.py flash
 ![screen-host](https://user-images.githubusercontent.com/6020549/226932565-e91a808d-113d-4802-81b9-aaec2df34d75.jpg)
 
 
-# Name resolution by service name   
+# IP address resolution by service name   
 To find the IP address, you need to know the service name.   
 Multiple hosts with the same service name are allowed within the network.   
 If you give two nodes the same service name, they can find each other.   
