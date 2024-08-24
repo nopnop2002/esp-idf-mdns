@@ -1,5 +1,5 @@
 # esp-idf-mdns
-How to name resolution by mDNS.   
+How to IP address resolution by mDNS.   
 
 Since ESP-IDF Ver5, mDNS has been moved from built-in library to [this](https://components.espressif.com/components/espressif/mdns) IDF component registry.   
 Accordingly, the mDNS official example has been removed from the ESP-IDF repository.   
