@@ -100,7 +100,7 @@ hosts:          files mdns4_minimal [NOTFOUND=return] dns
 
 - Execute ping
 ```
-ping {mDNS host name}.local
+$ ping {mDNS host name}.local
 ```
 
 
