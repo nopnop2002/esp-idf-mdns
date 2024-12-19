@@ -91,8 +91,22 @@ idf.py flash
 ### Screen shot
 ![screen-service](https://user-images.githubusercontent.com/6020549/226932577-31477732-0770-4def-a1f0-544a6e28b382.jpg)
 
+# Resolving mDNS host name   
 
-# Resolving mDNS using avahi-utils
+- Edit /etc/nsswitch.conf
+```
+hosts:          files mdns4_minimal [NOTFOUND=return] dns
+```
+
+- Execute ping
+```
+ping {mDNS host name}.local
+```
+
+
+# Resolving mDNS using avahi-utils   
+
+- Install avahi-utils
 ```
 $ sudo apt install avahi-utils
 ```
