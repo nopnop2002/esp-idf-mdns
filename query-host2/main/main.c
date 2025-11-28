@@ -60,7 +60,6 @@ esp_err_t wifi_init_sta(void)
 	s_wifi_event_group = xEventGroupCreate();
 
 	ESP_ERROR_CHECK(esp_netif_init());
-
 	ESP_ERROR_CHECK(esp_event_loop_create_default());
 	esp_netif_create_default_wifi_sta();
 
@@ -95,12 +94,10 @@ esp_err_t wifi_init_sta(void)
 			},
 		},
 	};
+	ESP_ERROR_CHECK(esp_wifi_set_ps(WIFI_PS_NONE));
 	ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_STA) );
-	ESP_ERROR_CHECK(esp_wifi_set_config(ESP_IF_WIFI_STA, &wifi_config) );
-	//ESP_ERROR_CHECK(esp_wifi_set_ps(WIFI_PS_NONE));
+	ESP_ERROR_CHECK(esp_wifi_set_config(WIFI_IF_STA, &wifi_config) );
 	ESP_ERROR_CHECK(esp_wifi_start() );
-
-	ESP_LOGI(TAG, "wifi_init_sta finished.");
 
 	/* Waiting until either the connection is established (WIFI_CONNECTED_BIT) or connection failed for the maximum
 	 * number of re-tries (WIFI_FAIL_BIT). The bits are set by event_handler() (see above) */
@@ -225,22 +222,22 @@ static void query_mdns_service(const char * service_name, const char * proto)
 
 static void query_mdns_host(const char * host_name)
 {
-    ESP_LOGI(__FUNCTION__, "Query A: %s.local", host_name);
+	ESP_LOGI(__FUNCTION__, "Query A: %s.local", host_name);
 
-    struct esp_ip4_addr addr;
-    addr.addr = 0;
+	struct esp_ip4_addr addr;
+	addr.addr = 0;
 
-    esp_err_t err = mdns_query_a(host_name, 2000,  &addr);
-    if(err){
-        if(err == ESP_ERR_NOT_FOUND){
-            ESP_LOGW(__FUNCTION__, "%s: Host was not found!", esp_err_to_name(err));
-            return;
-        }
-        ESP_LOGE(__FUNCTION__, "Query Failed: %s", esp_err_to_name(err));
-        return;
-    }
+	esp_err_t err = mdns_query_a(host_name, 2000,  &addr);
+	if(err){
+		if(err == ESP_ERR_NOT_FOUND){
+			ESP_LOGW(__FUNCTION__, "%s: Host was not found!", host_name);
+		} else {
+			ESP_LOGE(__FUNCTION__, "Query Failed: %s", esp_err_to_name(err));
+		}
+		return;
+	}
 
-    ESP_LOGI(__FUNCTION__, "Query A: %s.local resolved to: " IPSTR, host_name, IP2STR(&addr));
+	ESP_LOGI(__FUNCTION__, "Query A: %s.local resolved to: " IPSTR, host_name, IP2STR(&addr));
 }
 
 void app_main(void)
@@ -254,7 +251,7 @@ void app_main(void)
 	ESP_ERROR_CHECK(ret);
 
 	// Initialize WiFi
-	wifi_init_sta();
+	ESP_ERROR_CHECK(wifi_init_sta());
 
 	// Initialize mDNS
 	initialise_mdns();
