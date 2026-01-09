@@ -111,7 +111,7 @@ I used the Windows10 command prompt.
 ![Image](https://github.com/user-attachments/assets/01e41314-9b34-44c6-b53f-c36f60a7868a)
 ![Image](https://github.com/user-attachments/assets/40a65d74-6b4d-4087-b847-622db83e6db5)
 
-# Resolving mDNS using avahi-utils   
+# Resolving mDNS using avahi-utils in Linux   
 
 - Install avahi-utils
 ```
