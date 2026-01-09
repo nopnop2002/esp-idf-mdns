@@ -91,8 +91,8 @@ idf.py flash
 ### Screen shot
 ![screen-service](https://user-images.githubusercontent.com/6020549/226932577-31477732-0770-4def-a1f0-544a6e28b382.jpg)
 
-# Resolving mDNS using Linux ping   
-
+# Resolving mDNS hostnames using ping in Linux   
+I used the Debian11.   
 - Edit /etc/nsswitch.conf
 ```
 hosts:          files mdns4_minimal [NOTFOUND=return] dns
@@ -105,6 +105,11 @@ $ ping {mDNS host name}.local
 
 ![Image](https://github.com/user-attachments/assets/4c8c9214-b236-44a8-9ff3-b6803e53a6b8)
 ![Image](https://github.com/user-attachments/assets/40bd3d80-4125-4593-8b14-9c7a373c9487)
+
+# Resolving mDNS hostnames using ping in Windows   
+I used the Windows10 command prompt.   
+![Image](https://github.com/user-attachments/assets/01e41314-9b34-44c6-b53f-c36f60a7868a)
+![Image](https://github.com/user-attachments/assets/40a65d74-6b4d-4087-b847-622db83e6db5)
 
 # Resolving mDNS using avahi-utils   
 
