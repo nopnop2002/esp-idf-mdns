@@ -13,9 +13,9 @@ There are two methods for IP address resolution using mDNS.
 
 This is a quick example of each.   
 
-# Software requiment
-ESP-IDF V4.4/V5.x.   
-ESP-IDF V5.0 is required when using ESP32-C2.   
+# Software requirements
+ESP-IDF V5.0 or later.   
+ESP-IDF V4.4 release branch reached EOL in July 2024.   
 ESP-IDF V5.1 is required when using ESP32-C6.   
 
 # Hardware requirements
@@ -91,7 +91,7 @@ idf.py flash
 ### Screen shot
 ![screen-service](https://user-images.githubusercontent.com/6020549/226932577-31477732-0770-4def-a1f0-544a6e28b382.jpg)
 
-# Resolving mDNS using ping   
+# Resolving mDNS using Linux ping   
 
 - Edit /etc/nsswitch.conf
 ```
@@ -103,6 +103,8 @@ hosts:          files mdns4_minimal [NOTFOUND=return] dns
 $ ping {mDNS host name}.local
 ```
 
+![Image](https://github.com/user-attachments/assets/4c8c9214-b236-44a8-9ff3-b6803e53a6b8)
+![Image](https://github.com/user-attachments/assets/40bd3d80-4125-4593-8b14-9c7a373c9487)
 
 # Resolving mDNS using avahi-utils   
 
