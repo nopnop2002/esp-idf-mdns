@@ -27,7 +27,7 @@ menu "Application Configuration"
 
 	config MDNS_TXT
 		bool "Use mDNS TXT Record"
-		default false
+		default n
 		help
 			Use mDNS TXT Record.
 
