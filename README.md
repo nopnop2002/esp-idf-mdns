@@ -135,14 +135,14 @@ idf.py flash
 # Resolving mDNS hostnames using ping in Linux   
 I used the Debian11.   
 - Edit /etc/nsswitch.conf
-```
-hosts:          files mdns4_minimal [NOTFOUND=return] dns
-```
+	```
+	hosts:          files mdns4_minimal [NOTFOUND=return] dns
+	```
 
 - Execute ping
-```
-$ ping {mDNS host name}.local
-```
+	```
+	$ ping {mDNS host name}.local
+	```
 
 ![Image](https://github.com/user-attachments/assets/4c8c9214-b236-44a8-9ff3-b6803e53a6b8)
 ![Image](https://github.com/user-attachments/assets/40bd3d80-4125-4593-8b14-9c7a373c9487)
