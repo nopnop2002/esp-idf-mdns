@@ -88,6 +88,11 @@ idf.py flash
 ### ESP32#3   
 This project does not have an mDNS name.   
 This project uses gethostbyname to search for the mDNS name `esp32-mdns1.local` and `esp32-mdns2.local`.   
+```
+cd esp-idf-mdns/gethostbyname
+idf.py menuconfig
+idf.py flash
+```
 
 ### Configuration
 ![config-top](https://user-images.githubusercontent.com/6020549/226929344-8410a99a-545d-4a88-8705-9842d3caf072.jpg)
