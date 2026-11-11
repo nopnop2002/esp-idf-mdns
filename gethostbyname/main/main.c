@@ -20,6 +20,8 @@
 #include "esp_log.h"
 #include "nvs_flash.h"
 
+#include "lwip/dns.h"
+#include "lwip/tcpip.h"
 #include "netdb.h" //hostent
 
 /* FreeRTOS event group to signal when we are connected*/
@@ -128,6 +130,16 @@ esp_err_t wifi_init_sta(void)
 	return ret_value;
 }
 
+// Clear the DNS cache and perform a new DNS query against a remote DNS server
+static void clear_dns_cache_cb(void *arg) {
+    dns_clear_cache();
+}
+
+// Safely clear the cache on the lwIP thread
+void app_clear_dns_cache(void) {
+    tcpip_callback(clear_dns_cache_cb, NULL);
+}
+
 void app_main(void)
 {
 	// Initialize NVS
@@ -143,6 +155,10 @@ void app_main(void)
 
 	struct hostent *hp;
 	while(1) {
+		// Clear the DNS cache
+		app_clear_dns_cache();
+
+		// Search for CONFIG_HOSTNAME1
 		ESP_LOGI(TAG, "convert from [%s] to ip using gethostbyname", CONFIG_HOSTNAME1);
 		hp = gethostbyname(CONFIG_HOSTNAME1);
 		if (hp == NULL) {
@@ -155,6 +171,7 @@ void app_main(void)
 			}
 		}
 
+		// Search for CONFIG_HOSTNAME2
 		ESP_LOGI(TAG, "convert from [%s] to ip using gethostbyname", CONFIG_HOSTNAME2);
 		hp = gethostbyname(CONFIG_HOSTNAME2);
 		if (hp == NULL) {
