@@ -5,11 +5,17 @@ Since ESP-IDF Ver5, mDNS has been moved from built-in library to [this](https://
 Accordingly, the mDNS official example has been removed from the ESP-IDF repository.   
 The official repository for mDNS is [here](https://github.com/espressif/esp-protocols/tree/master/components/mdns).   
 
-
 The official repository comes with example code, but it's a bit confusing.   
-There are two methods for IP address resolution using mDNS.   
-- IP address resolution by host name   
-- IP address resolution by service name   
+There are three ways to resolve IP addresses using mDNS.   
+- IP address resolution by host name using mDNS queries.   
+	mDNS queries are provided by the mDNS component.
+- IP address resolution by host name using gethostbyname.   
+	gethostbyname is a standard function included in the ESP-IDF.   
+	gethostbyname stores the results of name resolution in a cache.   
+	Consequently, even if the target disappears, it will continue to return the cached result for some time.   
+	It takes some time for the cache to be cleared.   
+- IP address resolution by service name using mDNS queries.   
+	mDNS queries are provided by the mDNS component.
 
 This is a quick example of each.   
 
@@ -22,14 +28,14 @@ ESP-IDF V5.1 is required when using ESP32-C6.
 Requires two ESP32s.   
 
 
-# IP address resolution by host name   
+# IP address resolution by host name using mDNS queries   
 To find the IP address, you need to know the mDNS hostname.   
 mDNS hostnames must be unique within the network.   
 Write query-host1 to ESP32#1 and query-host2 to ESP32#2.   
 
 ### ESP32#1   
-The mDNS name for this project is ```esp32-mdns1.local```.   
-Then look for the the mDNS name of ```esp32-mdns2.local```.   
+The mDNS name for this project is `esp32-mdns1.local`.   
+This project uses mDNS queries to search for the mDNS name `esp32-mdns2.local`.   
 ```
 git clone https://github.com/nopnop2002/esp-idf-mdns
 cd esp-idf-mdns/query-host1
@@ -37,11 +43,9 @@ idf.py menuconfig
 idf.py flash
 ```
 
-
-
 ### ESP32#2   
 The mDNS name for this project is ```esp32-mdns2.local```.   
-Then look for the mDNS name of ```esp32-mdns1.local```.   
+This project uses mDNS queries to search for the mDNS name `esp32-mdns1.local`.   
 ```
 cd esp-idf-mdns/query-host2
 idf.py menuconfig
@@ -56,7 +60,44 @@ idf.py flash
 ![screen-host](https://user-images.githubusercontent.com/6020549/226932565-e91a808d-113d-4802-81b9-aaec2df34d75.jpg)
 
 
-# IP address resolution by service name   
+# IP address resolution by host name using gethostbyname   
+To find the IP address, you need to know the mDNS hostname.   
+mDNS hostnames must be unique within the network.   
+Write query-host1 to ESP32#1 and query-host2 to ESP32#2.   
+Write gethostbyname to ESP32#3.   
+
+### ESP32#1   
+The mDNS name for this project is `esp32-mdns1.local`.   
+This project uses mDNS queries to search for the mDNS name `esp32-mdns2.local`.   
+```
+git clone https://github.com/nopnop2002/esp-idf-mdns
+cd esp-idf-mdns/query-host1
+idf.py menuconfig
+idf.py flash
+```
+
+### ESP32#2   
+The mDNS name for this project is ```esp32-mdns2.local```.   
+This project uses mDNS queries to search for the mDNS name `esp32-mdns1.local`.   
+```
+cd esp-idf-mdns/query-host2
+idf.py menuconfig
+idf.py flash
+```
+
+### ESP32#3   
+This project does not have an mDNS name.
+This project uses gethostbyname to search for the mDNS name `esp32-mdns1.local` and `esp32-mdns2.local`.   
+
+### Configuration
+![config-top](https://user-images.githubusercontent.com/6020549/226929344-8410a99a-545d-4a88-8705-9842d3caf072.jpg)
+![config-app-host](https://user-images.githubusercontent.com/6020549/226929353-f4d299a1-ca5c-4db8-aa4e-37ffb668bce5.jpg)
+
+### Screen shot
+<img width="659" height="486" alt="gethostbyname" src="https://github.com/user-attachments/assets/fef361c7-0654-4a24-8fba-9b543d0cdfe4" />
+
+
+# IP address resolution by service name using mDNS queries   
 To find the IP address, you need to know the service name.   
 Multiple hosts with the same service name are allowed within the network.   
 If you give two nodes the same service name, they can find each other.   
@@ -66,7 +107,7 @@ Each mDNS hostname is generated from MAC address.
 Therefore, the other party's mDNS host name is completely unknown.   
 
 ### ESP32#1   
-This project looks for the service name of ```_service_49876._udp```.   
+This project uses mDNS queries to search for the service name of ```_service_49876._udp```.   
 ```
 git clone https://github.com/nopnop2002/esp-idf-mdns
 cd esp-idf-mdns/query-service
@@ -75,7 +116,7 @@ idf.py flash
 ```
 
 ### ESP32#2   
-This project looks for the service name of ```_service_49876._udp```.   
+This project uses mDNS queries to search for the service name of ```_service_49876._udp```.   
 ```
 cd esp-idf-mdns/query-service
 idf.py menuconfig
