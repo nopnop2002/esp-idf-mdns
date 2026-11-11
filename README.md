@@ -1,7 +1,7 @@
 # esp-idf-mdns
 How to IP address resolution by mDNS.   
 
-Since ESP-IDF Ver5, mDNS has been moved from built-in library to [this](https://components.espressif.com/components/espressif/mdns) IDF component registry.   
+Since ESP-IDF Ver5, mDNS component has been moved from built-in library to [this](https://components.espressif.com/components/espressif/mdns) IDF component registry.   
 Accordingly, the mDNS official example has been removed from the ESP-IDF repository.   
 The official repository for mDNS is [here](https://github.com/espressif/esp-protocols/tree/master/components/mdns).   
 
@@ -86,7 +86,7 @@ idf.py flash
 ```
 
 ### ESP32#3   
-This project does not have an mDNS name.
+This project does not have an mDNS name.   
 This project uses gethostbyname to search for the mDNS name `esp32-mdns1.local` and `esp32-mdns2.local`.   
 
 ### Configuration
