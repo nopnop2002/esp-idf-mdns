@@ -76,7 +76,7 @@ idf.py menuconfig
 idf.py flash
 ```
 
-### ESP32#2   
+### ESP32#2 (Optional)   
 The mDNS name for this project is ```esp32-mdns2.local```.   
 This project uses mDNS queries to search for the mDNS name `esp32-mdns1.local`.   
 ```
